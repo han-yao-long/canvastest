@@ -18,7 +18,7 @@ class State {
     }
   }
 
-
+// 算法类
   class Vector {
     constructor(x, y) {
       this.x = x;
@@ -50,7 +50,7 @@ class State {
     }
   }
 
-  class Canvas {
+  export class Canvas {
     constructor(parent = document.body, width = 400, height = 400) {
       this.canvas = document.createElement('canvas');
       this.canvas.width = width;
@@ -216,7 +216,7 @@ class State {
 
   const colors = ['red', 'green', 'blue', 'purple', 'orange'];
 
-  const collidingBalls = ({ width = 400, height = 400, parent = document.body, count = 50 }) => {
+  export const collidingBalls = ({ width = 400, height = 400, parent = document.body, count = 50 }) => {
     const display = new Canvas(parent, width, height);
     const balls = [];
     for (let i = 0; i < count; i++) {
@@ -234,4 +234,4 @@ class State {
     });
   };
 
-  collidingBalls();
+  // collidingBalls();

@@ -1,7 +1,6 @@
 <template>
   <div>
     <canvas id="canvas" :width="canvasWidth" :height="canvasHeight"></canvas>
-    <img :src="this.img2" alt="" />
   </div>
 </template>
 <script>
