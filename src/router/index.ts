@@ -28,6 +28,16 @@ const routes: Array<RouteConfig> = [
     path: '/3-3',
     name: "canvas3-1",
     component: () => import('../views/3/secend.vue')
+  },
+  {
+    path: '/4-1',
+    name: "canvas4-1",
+    component: () => import('../views/4/index.vue')
+  },
+  {
+    path: '/4-2',
+    name: "canvas4-1",
+    component: () => import('../views/4/secend.vue')
   }
 ]
 
