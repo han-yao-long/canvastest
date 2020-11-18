@@ -35,12 +35,11 @@ export class Canvas {
     loop() {
         // 清空画板
         this.clearDisplay();
-
         // 遍历插入的对象 对其进行绘制
         if (this.actorList.length) {
             this.actorList.forEach(item => {
                 this.ctx.save();
-                this.translatePosition(this.position.x, this.position.y);
+                this.translatePosition(this.scale, 0, 0, this.scale, this.position.x, this.position.y);
                 item.panter()
             })
         }
@@ -64,16 +63,45 @@ export class Canvas {
     }
     // 鼠标滚轮事件
     onMouseWheel(e) {
-        // 改变时变化缩放比例
+        // // 改变时变化缩放比例
         if (e.deltaY < 0) {
-            this.scale = 1.1;
+            this.scale = this.scale + 0.1;
         } else if (e.deltaY > 0) {
-            this.scale = 0.9;
+            this.scale = this.scale - 0.1;
         };
         // 注 放大必须大于 1；
-        // 缩小必须小于 1
-        this.setScale(this.scale, this.scale)
+
     }
+
+    /**
+     * 缩放视图时计算视图的位置与缩放比例
+     *
+     * @param zoom        缩放比例
+     * @param x0          缩放计算的中心点 X 坐标
+     * @param y0          缩放计算的中心点 Y 坐标
+     */
+    scaleByPoint(zoom, x0, y0) {
+        if (!this.scalable) {
+            return;
+        }
+
+        let z = zoom;
+        /**
+         * 缩放比例在最小比例和最大比例范围内
+        */
+        if (this.scale * zoom >= this.maxScale) {
+            z = this.maxScale / this.scale;
+            this.scale = this.maxScale;
+        } else if (this.scale * zoom <= this.minScale) {
+            z = this.minScale / this.scale;
+            this.scale = this.minScale;
+        } else {
+            this.scale *= zoom;
+        }
+
+        this.origin.x = x0 - (x0 - this.origin.x) * z;
+        this.origin.y = y0 - (y0 - this.origin.y) * z;
+    } // Function scaleByPoint()
 
     onMouseDown(e) {
         this.omMouseDownPosi = {
@@ -127,8 +155,8 @@ export class Canvas {
     /**
      *  拖动位移
      */
-    translatePosition(dx, dy) {
-        this.ctx.translate(dx, dy);
+    translatePosition(a = 1, b = 0, c = 0, d = 1, dx, dy) {
+        this.ctx.transform(a, b, c, d, dx, dy);
     }
 }
 

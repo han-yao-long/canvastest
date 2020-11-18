@@ -14,9 +14,15 @@ module.exports = {
                     "^/mapapi": ''
                 }
             },
-               // 图片服务器
-               '/image-service': {
+            // 图片服务器
+            '/image-service': {
                 target: 'http://adm.sagacloud.cn',
+                changeOrigin: true,
+                secure: false,
+            },
+            //图片服务器
+            '/meiku': {
+                target: 'http://39.102.40.239:8080',
                 changeOrigin: true,
                 secure: false,
             },

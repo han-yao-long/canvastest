@@ -4,7 +4,7 @@
   </div>
 </template>
 <script>
-import { Canvas, Ball } from "./secend";
+import { Canvas, Ball } from "./secend.js";
 export default {
   data() {
     return {};
